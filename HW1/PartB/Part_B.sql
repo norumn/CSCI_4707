@@ -1,4 +1,5 @@
 -- Scenario 1
+
 -- Entities
 CREATE TABLE Professor (
     staff_id INT PRIMARY KEY,
@@ -37,10 +38,15 @@ CREATE TABLE Registration (
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
+
 -- Scenario 2
 -- Relationships
 CREATE TABLE Teaches (
-    -- ... remains same as Scenario 1
+    staff_id INT,
+    course_id INT,
+    PRIMARY KEY(staff_id, course_id),
+    FOREIGN KEY(staff_id) REFERENCES Professor(staff_id),
+    FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
 CREATE TABLE LastRegistration (
@@ -51,6 +57,7 @@ CREATE TABLE LastRegistration (
     FOREIGN KEY(student_id) REFERENCES Student(student_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
+
 
 -- Scenario 3
 -- New Entity for Category
@@ -88,7 +95,7 @@ CREATE TABLE Advises (
     FOREIGN KEY(graduate_id) REFERENCES Graduate(student_id)
 );
 
--- Scenario 5
+---- Scenario 5
 -- New Entity for Project
 CREATE TABLE Project (
     project_id INT,
